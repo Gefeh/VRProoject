@@ -11,22 +11,22 @@ public class IdleCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override CrocodileStateMachine.States GetNextState()
     {
-        throw new System.NotImplementedException();
+        return CrocodileStateMachine.States.Idle;
     }
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
 }

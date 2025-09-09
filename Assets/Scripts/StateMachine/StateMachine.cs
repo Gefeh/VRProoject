@@ -12,7 +12,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
     void Start()
     {
         _CurrentState.EnterState();
-        state = _CurrentState.ToString();
+        state = _CurrentState.StateKey.ToString();
     }
 
     void Update()
