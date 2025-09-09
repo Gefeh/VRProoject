@@ -18,7 +18,7 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
     {
         crocodile = GetComponent<Crocodile>();
 
-        _States.Add(States.Idle, new BossStateIdle(States.Idle, this));
+        _States.Add(States.Idle, new IdleCrocodileState(States.Idle, this));
 
         _CurrentState = _States[States.Idle];
     }
