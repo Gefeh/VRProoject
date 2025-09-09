@@ -7,6 +7,11 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
     public enum States
     {
         Idle,
+        Wandering,
+        Ordering,
+        Hostile,
+        Attacking,
+        Dead,
     }
 
     void Awake()

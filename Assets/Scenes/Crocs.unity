@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 301a3ba698ca3934aa41fc50b4cdca9a, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -154,7 +154,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -187,7 +187,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -608,10 +608,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99969697
+      objectReference: {fileID: 0}
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.023558328
+      objectReference: {fileID: 0}
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0071391095
+      objectReference: {fileID: 0}
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0002816205
+      objectReference: {fileID: 0}
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.818
+      objectReference: {fileID: 0}
+    - target: {fileID: 976959021215990899, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.013
+      objectReference: {fileID: 0}
     - target: {fileID: 1911084491031952785, guid: ab7a757c662c68041834735cc4398d59, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 71838398b31d6b64f9e69d44ba59bb82, type: 2}
+    - target: {fileID: 2269811012892753991, guid: ab7a757c662c68041834735cc4398d59, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2342855537024826094, guid: ab7a757c662c68041834735cc4398d59, type: 3}
       propertyPath: m_Name
       value: Crocodile
