@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class IdleCrocodileState : BaseState<CrocodileStateMachine.States>
+public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
 {
     protected CrocodileStateMachine _machine;
 
-    public IdleCrocodileState(CrocodileStateMachine.States key, CrocodileStateMachine machine) : base(key)
+    public WanderingCrocodileState(CrocodileStateMachine.States key, CrocodileStateMachine machine) : base(key)
     {
         this._machine = machine;
     }
 
     public override void EnterState()
     {
-        _machine.crocodile.PlayAnimation("Crocodile_Idle");
+        _machine.crocodile.PlayAnimation("Crocodile_Walk");
     }
 
     public override void ExitState()
@@ -21,7 +21,7 @@ public class IdleCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override CrocodileStateMachine.States GetNextState()
     {
-        return CrocodileStateMachine.States.Idle;
+        return CrocodileStateMachine.States.Wandering;
     }
 
     public override void UpdateState()

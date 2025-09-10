@@ -11,6 +11,7 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
         Ordering,
         Hostile,
         Attacking,
+        Hurt,
         Dead,
     }
 
@@ -24,6 +25,7 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
         crocodile = GetComponent<Crocodile>();
 
         _States.Add(States.Idle, new IdleCrocodileState(States.Idle, this));
+        _States.Add(States.Wandering, new WanderingCrocodileState(States.Wandering, this));
 
         _CurrentState = _States[States.Idle];
     }

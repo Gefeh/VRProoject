@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class Crocodile : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Animator _animator;
+
+    void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayAnimation(string animationState)
     {
-        
+        _animator.Play(animationState);
     }
 }

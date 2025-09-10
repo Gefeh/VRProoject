@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
+public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
 {
     protected CrocodileStateMachine _machine;
 
-    public WanderingCrocodileState(CrocodileStateMachine.States key, CrocodileStateMachine machine) : base(key)
+    public OrderingCrocodileState(CrocodileStateMachine.States key, CrocodileStateMachine machine) : base(key)
     {
         this._machine = machine;
     }
