@@ -54,6 +54,9 @@ public class Crocodile : MonoBehaviour
         _timeToWait = Random.Range(_minWaitTimeWhenStuck, _maxWaitTimeWhenStuck);
     }
 
+    /// <summary>
+    /// Finds a new destination unbiased towards the corcodiles' forward direction.
+    /// </summary>
     private void SetRandomFallbackDestination()
     {
         Vector3 randomDirection = Random.insideUnitSphere * _wanderRadius;
@@ -65,6 +68,10 @@ public class Crocodile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays the specified animation in this crocodile's animator component.
+    /// </summary>
+    /// <param name="animationState"></param>
     public void PlayAnimation(string animationState)
     {
         _animator.Play(animationState);
