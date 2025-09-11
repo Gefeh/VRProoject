@@ -11,12 +11,16 @@ public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void EnterState()
     {
-        _machine.crocodile.PlayAnimation("Crocodile_Walk");
+        _machine.crocodile.PlayAnimation("Crocodile_Swim");
+        _machine.crocodile.SetNewWanderDestination();
     }
 
     public override void ExitState()
     {
-        
+        if (_machine.crocodile.NavMeshAgent.hasPath)
+        {
+            _machine.crocodile.NavMeshAgent.ResetPath();
+        }
     }
 
     public override CrocodileStateMachine.States GetNextState()
@@ -26,7 +30,17 @@ public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void UpdateState()
     {
-        
+        if (!_machine.crocodile.NavMeshAgent.pathPending && _machine.crocodile.NavMeshAgent.remainingDistance <= _machine.crocodile.NavMeshAgent.stoppingDistance)
+        {
+            _machine.crocodile.SetNewWanderDestination();
+        }
+
+        if (_machine.crocodile.IdleTimer >= _machine.crocodile.TimeToWait)
+        {
+            _machine.crocodile.SetNewWanderDestination();
+        }
+
+        _machine.crocodile.IdleTimer += Time.deltaTime;
     }
 
 }
