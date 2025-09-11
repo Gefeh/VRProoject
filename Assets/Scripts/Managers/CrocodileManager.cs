@@ -28,12 +28,12 @@ public class CrocodileManager : MonoBehaviour
     {
         if (crocodilePrefab == null)
         {
-            Debug.LogError("Crocodile Prefab is not assigned. Aborting spawn.");
+            Debug.Log("Crocodile Prefab is not assigned. Aborting spawn.");
             return;
         }
         if (spawnPoints.Count == 0)
         {
-            Debug.LogWarning("No spawn points have been assigned.");
+            Debug.Log("No spawn points have been assigned.");
             return;
         }
         SpawnCrocodiles();
@@ -44,7 +44,7 @@ public class CrocodileManager : MonoBehaviour
         int crocodilesToSpawn = Mathf.Min(numberOfCrocodiles, spawnPoints.Count);
         if (numberOfCrocodiles > spawnPoints.Count)
         {
-            Debug.LogWarning($"Attempting to spawn {numberOfCrocodiles}, but only {spawnPoints.Count} points are available. Spawning {spawnPoints.Count}.");
+            Debug.Log($"Attempting to spawn {numberOfCrocodiles}, but only {spawnPoints.Count} points are available. Spawning {spawnPoints.Count}.");
         }
 
         List<Transform> shuffledPoints = spawnPoints.OrderBy(x => Random.value).ToList();
@@ -66,10 +66,8 @@ public class CrocodileManager : MonoBehaviour
     /// </summary>
     private Transform FindOrCreateParent(string parentName)
     {
-        // Try to find the existing parent
         Transform parentTransform = transform.Find(parentName);
 
-        // If it doesn't exist, create it
         if (parentTransform == null)
         {
             GameObject parentObject = new GameObject(parentName);
