@@ -1,12 +1,13 @@
+using System.Linq;
 using UnityEngine;
 
 public class TargetCollision : MonoBehaviour
 {
-    [SerializeField] private string targetTag = "Enemy";
+    [SerializeField] private string[] targetTags;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(targetTag))
+        if (targetTags.Contains(collision.gameObject.tag))
         {
             Destroy(collision.gameObject);
         }
