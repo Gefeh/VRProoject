@@ -5,25 +5,33 @@ public class Crocodile : MonoBehaviour
 {
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
+    private CrocodileManager _crocodileManager;
 
     [Header("Movement")]
     [SerializeField] private float _wanderRadius = 15f;
     [SerializeField] private float _wanderJitter = 5f;
     private float _idleTimer;
     private float _timeToWait;
-    [SerializeField] private float _minWaitTimeWhenStuck;
-    [SerializeField] private float _maxWaitTimeWhenStuck;
+    [SerializeField] private float _minWaitTimeWhenIdle;
+    [SerializeField] private float _maxWaitTimeWhenIdle;
 
     public Animator Animator { get { return _animator; } private set { _animator = value; } }
     public NavMeshAgent NavMeshAgent { get { return _navMeshAgent; } private set { _navMeshAgent = value; } }
-    public float IdleTimer { get { return _idleTimer; } set { _idleTimer = value; } }
-    public float TimeToWait { get { return _timeToWait; } set { _timeToWait = value; } }
+    public CrocodileManager CrocodileManager { get { return _crocodileManager; } set { _crocodileManager = value; } }
+    public float IdleTimer { get { return _idleTimer; } private set { _idleTimer = value; } }
+    public float TimeToWait { get { return _timeToWait; } private set { _timeToWait = value; } }
+
+    public void Initialize(CrocodileManager manager)
+    {
+        _crocodileManager = manager;
+    }
 
     void Awake()
     {
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         transform.Rotate(0, Random.Range(0, 360), 0);
+        _timeToWait = Random.Range(_minWaitTimeWhenIdle, _maxWaitTimeWhenIdle);
     }
 
     void Update()
@@ -50,8 +58,18 @@ public class Crocodile : MonoBehaviour
         {
             SetRandomFallbackDestination();
         }
+        ResetIdleTimer();
+    }
+
+    public void ResetIdleTimer()
+    {
         _idleTimer = 0f;
-        _timeToWait = Random.Range(_minWaitTimeWhenStuck, _maxWaitTimeWhenStuck);
+        _timeToWait = Random.Range(_minWaitTimeWhenIdle, _maxWaitTimeWhenIdle);
+    }
+
+    public void IncrementIdleTimer()
+    {
+        _idleTimer += Time.deltaTime;
     }
 
     /// <summary>
@@ -75,5 +93,10 @@ public class Crocodile : MonoBehaviour
     public void PlayAnimation(string animationState)
     {
         _animator.Play(animationState);
+    }
+
+    public void Approachbar()
+    {
+
     }
 }

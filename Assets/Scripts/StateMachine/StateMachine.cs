@@ -11,7 +11,6 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
     [Tooltip("Use this to manually transition to a new state from the Inspector.")]
     public EState transitionToState;
     private EState _previousTransitionState;
-    // ----------------------------
 
     protected Dictionary<EState, BaseState<EState>> _States = new Dictionary<EState, BaseState<EState>>();
     protected BaseState<EState> _CurrentState;

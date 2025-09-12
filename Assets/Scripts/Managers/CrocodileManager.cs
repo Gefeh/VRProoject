@@ -4,16 +4,24 @@ using System.Linq;
 
 public class CrocodileManager : MonoBehaviour
 {
-    [Header("Spawning Configuration")]
-    public GameObject crocodilePrefab;
+    [Header("Crocodiles")]
+    [SerializeField] private GameObject _crocodilePrefab;
     [Range(1, 100)]
-    public int numberOfCrocodiles = 10;
+    public int numberOfCrocodilesAtStart = 10;
+    [Tooltip("A live list of all crocodile instances created by this manager.")]
+    [SerializeField] public List<Crocodile> spawnedCrocodiles = new List<Crocodile>();
 
     [Header("Spawn Points")]
     public List<Transform> spawnPoints = new List<Transform>();
 
     private Transform _spawnPointsParent;
     private Transform _crocodilesParent;
+
+    [Header("Bar")]
+    [SerializeField] private GameObject _bar;
+
+    public GameObject Bar { get { return _bar; } private set { _bar = value;  } }
+    public GameObject CrocodilePrefab { get { return _crocodilePrefab; } private set { _crocodilePrefab = value;  } }
 
     /// <summary>
     /// Awake is called before the first frame update, perfect for setup.
@@ -26,7 +34,7 @@ public class CrocodileManager : MonoBehaviour
 
     void Start()
     {
-        if (crocodilePrefab == null)
+        if (_crocodilePrefab == null)
         {
             Debug.Log("Crocodile Prefab is not assigned. Aborting spawn.");
             return;
@@ -36,15 +44,15 @@ public class CrocodileManager : MonoBehaviour
             Debug.Log("No spawn points have been assigned.");
             return;
         }
-        SpawnCrocodiles();
+        SpawnCrocodiles(numberOfCrocodilesAtStart);
     }
 
-    private void SpawnCrocodiles()
+    private void SpawnCrocodiles(int amount)
     {
-        int crocodilesToSpawn = Mathf.Min(numberOfCrocodiles, spawnPoints.Count);
-        if (numberOfCrocodiles > spawnPoints.Count)
+        int crocodilesToSpawn = Mathf.Min(amount, spawnPoints.Count);
+        if (amount > spawnPoints.Count)
         {
-            Debug.Log($"Attempting to spawn {numberOfCrocodiles}, but only {spawnPoints.Count} points are available. Spawning {spawnPoints.Count}.");
+            Debug.Log($"Attempting to spawn {amount}, but only {spawnPoints.Count} points are available. Spawning {spawnPoints.Count}.");
         }
 
         List<Transform> shuffledPoints = spawnPoints.OrderBy(x => Random.value).ToList();
@@ -54,7 +62,10 @@ public class CrocodileManager : MonoBehaviour
             Transform spawnPoint = shuffledPoints[i];
             if (spawnPoint != null)
             {
-                GameObject newCrocodile = Instantiate(crocodilePrefab, spawnPoint.position, spawnPoint.rotation);
+                GameObject newCrocodile = Instantiate(_crocodilePrefab, spawnPoint.position, spawnPoint.rotation);
+                Crocodile croc = newCrocodile.GetComponent<Crocodile>();
+                spawnedCrocodiles.Add(croc);
+                croc.Initialize(this);
                 newCrocodile.transform.SetParent(_crocodilesParent);
             }
         }

@@ -21,7 +21,7 @@ public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override CrocodileStateMachine.States GetNextState()
     {
-        return CrocodileStateMachine.States.Wandering;
+        return CrocodileStateMachine.States.Ordering;
     }
 
     public override void UpdateState()

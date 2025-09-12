@@ -40,7 +40,7 @@ public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
             _machine.crocodile.SetNewWanderDestination();
         }
 
-        _machine.crocodile.IdleTimer += Time.deltaTime;
+        _machine.crocodile.IncrementIdleTimer();
     }
 
 }

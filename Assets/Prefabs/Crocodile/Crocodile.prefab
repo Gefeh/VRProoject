@@ -157,8 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wanderRadius: 10
   _wanderJitter: 5
-  _minWaitTimeWhenStuck: 1.5
-  _maxWaitTimeWhenStuck: 4
+  _minWaitTimeWhenIdle: 1.5
+  _maxWaitTimeWhenIdle: 4
 --- !u!195 &8068086983014853400
 NavMeshAgent:
   m_ObjectHideFlags: 0

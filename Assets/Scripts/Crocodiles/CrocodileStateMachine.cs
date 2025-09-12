@@ -8,6 +8,7 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
     {
         Idle,
         Wandering,
+        Approaching,
         Ordering,
         Hostile,
         Attacking,
