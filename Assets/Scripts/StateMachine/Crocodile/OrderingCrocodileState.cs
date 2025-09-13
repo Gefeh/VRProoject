@@ -11,7 +11,7 @@ public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void EnterState()
     {
-        
+        _machine.crocodile.PlayAnimation("Crocodile_Sit");
     }
 
     public override void ExitState()
@@ -26,7 +26,7 @@ public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void UpdateState()
     {
-        
+        _machine.crocodile.LookAtPlayer();
     }
 
 }

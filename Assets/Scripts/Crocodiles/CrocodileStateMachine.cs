@@ -10,6 +10,7 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
         Wandering,
         Approaching,
         Ordering,
+        Leaving,
         Hostile,
         Attacking,
         Hurt,
@@ -20,6 +21,10 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
     {
         InitializeStates();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        _CurrentState?.OnTriggerReceived(other);
+    }
 
     void InitializeStates()
     {
@@ -27,6 +32,8 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
 
         _States.Add(States.Idle, new IdleCrocodileState(States.Idle, this));
         _States.Add(States.Wandering, new WanderingCrocodileState(States.Wandering, this));
+        _States.Add(States.Ordering, new OrderingCrocodileState(States.Ordering, this));
+        _States.Add(States.Approaching, new ApproachingCrocodileState(States.Approaching, this));
 
         _CurrentState = _States[States.Idle];
     }

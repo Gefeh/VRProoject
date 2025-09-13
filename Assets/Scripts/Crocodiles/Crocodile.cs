@@ -5,7 +5,7 @@ public class Crocodile : MonoBehaviour
 {
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
-    private CrocodileManager _crocodileManager;
+    [SerializeField] private CrocodileManager _crocodileManager;
 
     [Header("Movement")]
     [SerializeField] private float _wanderRadius = 15f;
@@ -95,8 +95,16 @@ public class Crocodile : MonoBehaviour
         _animator.Play(animationState);
     }
 
-    public void Approachbar()
+    public void ApproachBar()
     {
+        Debug.Log(NavMeshAgent);
+        Debug.Log(_crocodileManager);
+        Debug.Log(_crocodileManager.Bar);
+        NavMeshAgent.SetDestination(_crocodileManager.Bar.transform.position);
+    }
 
+    public void LookAtPlayer()
+    {
+        transform.LookAt(Camera.main.transform);
     }
 }

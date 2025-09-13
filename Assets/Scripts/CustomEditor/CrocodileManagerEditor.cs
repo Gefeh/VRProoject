@@ -6,11 +6,13 @@ public class CrocodileManagerEditor : Editor
 {
     private SerializedProperty crocodilePrefabProp;
     private SerializedProperty numberOfCrocodilesProp;
+    private SerializedProperty barProp;
 
     private void OnEnable()
     {
         crocodilePrefabProp = serializedObject.FindProperty("_crocodilePrefab");
         numberOfCrocodilesProp = serializedObject.FindProperty("numberOfCrocodilesAtStart");
+        barProp = serializedObject.FindProperty("_bar");
     }
 
     public override void OnInspectorGUI()
@@ -22,6 +24,7 @@ public class CrocodileManagerEditor : Editor
         EditorGUILayout.LabelField("Configuration", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(crocodilePrefabProp);
         EditorGUILayout.PropertyField(numberOfCrocodilesProp);
+        EditorGUILayout.PropertyField(barProp);
 
         EditorGUILayout.Space(10);
 
