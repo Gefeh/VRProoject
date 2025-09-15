@@ -13,7 +13,6 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
         Leaving,
         Hostile,
         Attacking,
-        Hurt,
         Dead,
     }
 

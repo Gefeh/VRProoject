@@ -114,6 +114,7 @@ public class Crocodile : MonoBehaviour
     public void ReturnToSpawn()
     {
         _navMeshAgent.SetDestination(new Vector3(_spawnPoint.position.x, transform.position.y, _spawnPoint.position.z));
+        _idleTimer = 10f;
     }
 
     /// <summary>
