@@ -120,7 +120,7 @@ public class CrocodileManagerEditor : Editor
         if (crocComponent != null)
         {
             Undo.RecordObject(crocComponent, "Initialize Crocodile");
-            crocComponent.Initialize(manager);
+            crocComponent.Initialize(manager, targetSpawnPoint);
 
             Undo.RecordObject(manager, "Add Crocodile to List");
             manager.spawnedCrocodiles.Add(crocComponent);

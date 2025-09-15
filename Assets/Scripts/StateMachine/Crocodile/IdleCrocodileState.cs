@@ -25,15 +25,18 @@ public class IdleCrocodileState : BaseState<CrocodileStateMachine.States>
         {
             return CrocodileStateMachine.States.Wandering;
         }
-        else
+        else if (_machine.crocodile.Satisfaction < _machine.crocodile.ThirstThreshold)
         {
-            return CrocodileStateMachine.States.Idle;
+            return CrocodileStateMachine.States.Approaching;
         }
+        
+        return CrocodileStateMachine.States.Idle;
     }
 
     public override void UpdateState()
     {
         _machine.crocodile.IncrementIdleTimer();
+        _machine.crocodile.ReduceSatisfaction();
     }
 
 }

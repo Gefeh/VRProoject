@@ -12,18 +12,30 @@ public class Crocodile : MonoBehaviour
     [SerializeField] private float _wanderJitter = 5f;
     private float _idleTimer;
     private float _timeToWait;
-    [SerializeField] private float _minWaitTimeWhenIdle;
-    [SerializeField] private float _maxWaitTimeWhenIdle;
+    [SerializeField] private float _minWaitTimeWhenIdle = 1.5f;
+    [SerializeField] private float _maxWaitTimeWhenIdle = 4f;
+    [SerializeField] private Transform _spawnPoint;
+
+    [Header("Customer")]
+    [SerializeField] private float _satisfaction;
+    [SerializeField] private float _maxSatisfaction = 100f;
+    [SerializeField] private float _thirstThreshold = 50f;
+    [SerializeField] private float _thirstCoefficient = 1f;
 
     public Animator Animator { get { return _animator; } private set { _animator = value; } }
     public NavMeshAgent NavMeshAgent { get { return _navMeshAgent; } private set { _navMeshAgent = value; } }
     public CrocodileManager CrocodileManager { get { return _crocodileManager; } set { _crocodileManager = value; } }
     public float IdleTimer { get { return _idleTimer; } private set { _idleTimer = value; } }
     public float TimeToWait { get { return _timeToWait; } private set { _timeToWait = value; } }
+    public float Satisfaction { get { return _satisfaction; } private set { _satisfaction = value; } }
+    public float MaxSatisfaction { get { return _maxSatisfaction; } private set { _maxSatisfaction = value; } }
+    public float ThirstThreshold { get { return _thirstThreshold; } private set { _thirstThreshold = value; } }
+    public Transform SpawnPoint { get { return _spawnPoint; } private set { _spawnPoint = value; } }
 
-    public void Initialize(CrocodileManager manager)
+    public void Initialize(CrocodileManager manager, Transform spawnPoint)
     {
         _crocodileManager = manager;
+        _spawnPoint = spawnPoint;
     }
 
     void Awake()
@@ -32,6 +44,8 @@ public class Crocodile : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         transform.Rotate(0, Random.Range(0, 360), 0);
         _timeToWait = Random.Range(_minWaitTimeWhenIdle, _maxWaitTimeWhenIdle);
+        _satisfaction = Random.Range(_thirstThreshold, _maxSatisfaction);
+        _thirstCoefficient = Random.Range(0.8f, 1.2f);
     }
 
     void Update()
@@ -72,6 +86,17 @@ public class Crocodile : MonoBehaviour
         _idleTimer += Time.deltaTime;
     }
 
+    public void ReduceSatisfaction()
+    {
+        _satisfaction -= _thirstCoefficient * Time.deltaTime;
+    }
+
+    public void Satisfy(float percentage = 100)
+    {
+        _satisfaction = (MaxSatisfaction * (percentage/100));
+        _thirstCoefficient *= Random.Range(1f, 1.1f);
+    }
+
     /// <summary>
     /// Finds a new destination unbiased towards the corcodiles' forward direction.
     /// </summary>
@@ -86,6 +111,11 @@ public class Crocodile : MonoBehaviour
         }
     }
 
+    public void ReturnToSpawn()
+    {
+        _navMeshAgent.SetDestination(new Vector3(_spawnPoint.position.x, transform.position.y, _spawnPoint.position.z));
+    }
+
     /// <summary>
     /// Plays the specified animation in this crocodile's animator component.
     /// </summary>
@@ -97,9 +127,6 @@ public class Crocodile : MonoBehaviour
 
     public void ApproachBar()
     {
-        Debug.Log(NavMeshAgent);
-        Debug.Log(_crocodileManager);
-        Debug.Log(_crocodileManager.Bar);
         NavMeshAgent.SetDestination(_crocodileManager.Bar.transform.position);
     }
 

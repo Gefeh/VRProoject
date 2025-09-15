@@ -12,7 +12,6 @@ public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
     public override void EnterState()
     {
         _machine.crocodile.PlayAnimation("Crocodile_Swim");
-        _machine.crocodile.SetNewWanderDestination();
     }
 
     public override void ExitState()
@@ -25,6 +24,10 @@ public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override CrocodileStateMachine.States GetNextState()
     {
+        if (_machine.crocodile.Satisfaction < _machine.crocodile.ThirstThreshold)
+        {
+            return CrocodileStateMachine.States.Approaching;
+        }
         return CrocodileStateMachine.States.Wandering;
     }
 
@@ -41,6 +44,7 @@ public class WanderingCrocodileState : BaseState<CrocodileStateMachine.States>
         }
 
         _machine.crocodile.IncrementIdleTimer();
+        _machine.crocodile.ReduceSatisfaction();
     }
 
 }

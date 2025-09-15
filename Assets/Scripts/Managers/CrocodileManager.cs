@@ -65,7 +65,7 @@ public class CrocodileManager : MonoBehaviour
                 GameObject newCrocodile = Instantiate(_crocodilePrefab, spawnPoint.position, spawnPoint.rotation);
                 Crocodile croc = newCrocodile.GetComponent<Crocodile>();
                 spawnedCrocodiles.Add(croc);
-                croc.Initialize(this);
+                croc.Initialize(this, spawnPoint);
                 newCrocodile.transform.SetParent(_crocodilesParent);
             }
         }
