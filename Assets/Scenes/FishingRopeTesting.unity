@@ -233,6 +233,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Device Simulator
       objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1172,6 +1176,14 @@ PrefabInstance:
       propertyPath: lineRenderer
       value: 
       objectReference: {fileID: 1204137647}
+    - target: {fileID: 5741752819970520205, guid: 4da6498f7b9e684499af162563141b18, type: 3}
+      propertyPath: aButtonAction
+      value: 
+      objectReference: {fileID: 424322862400161496, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 5741752819970520205, guid: 4da6498f7b9e684499af162563141b18, type: 3}
+      propertyPath: triggerAction
+      value: 
+      objectReference: {fileID: 1562590616120415265, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

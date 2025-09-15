@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // works with new Input System (Meta Quest supported)
+using UnityEngine.InputSystem;
 
 public class FishingRod : MonoBehaviour
 {
@@ -17,43 +17,44 @@ public class FishingRod : MonoBehaviour
     [Header("Line Renderer Settings")]
     public LineRenderer lineRenderer;
 
+    [Header("OpenXR Input")]
+    [Tooltip("Right trigger action (OpenXR binding: /user/hand/right/input/trigger/value).")]
+    public InputActionReference triggerAction;
+
+    [Tooltip("Right A button action (OpenXR binding: /user/hand/right/input/a/click).")]
+    public InputActionReference aButtonAction;
+
     // Internal
     private GameObject currentLure;
     private Rigidbody lureRb;
 
-    void Start()
+    void OnEnable()
     {
-        // Ensure LineRenderer is set up
-        if (lineRenderer == null)
-        {
-            lineRenderer = gameObject.AddComponent<LineRenderer>();
-        }
+        if (triggerAction != null)
+            triggerAction.action.performed += OnTriggerPressed;
 
-        lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = .01f;
-        lineRenderer.endWidth = .01f;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.black;
-        lineRenderer.endColor = Color.black;
+        if (aButtonAction != null)
+            aButtonAction.action.performed += OnAButtonPressed;
 
-        lineRenderer.enabled = false; // hidden until lure is spawned
+        triggerAction?.action.Enable();
+        aButtonAction?.action.Enable();
+    }
+
+    void OnDisable()
+    {
+        if (triggerAction != null)
+            triggerAction.action.performed -= OnTriggerPressed;
+
+        if (aButtonAction != null)
+            aButtonAction.action.performed -= OnAButtonPressed;
+
+        triggerAction?.action.Disable();
+        aButtonAction?.action.Disable();
     }
 
     void Update()
     {
-        // --- Cast input (currently SPACE for testing) ---
-        if (currentLure == null && Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            CastLure();
-        }
-
-        // --- Reel input (currently R for testing) ---
-        if (currentLure != null && Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            ReelIn();
-        }
-
-        // --- Line Rendering ---
+        // Line rendering
         if (currentLure != null)
         {
             lineRenderer.enabled = true;
@@ -66,9 +67,20 @@ public class FishingRod : MonoBehaviour
         }
     }
 
-    void CastLure()
+    private void OnTriggerPressed(InputAction.CallbackContext context)
     {
-        // Spawn lure prefab
+        if (currentLure == null)
+            CastLure();
+    }
+
+    private void OnAButtonPressed(InputAction.CallbackContext context)
+    {
+        if (currentLure != null)
+            ReelIn();
+    }
+
+    private void CastLure()
+    {
         currentLure = Instantiate(lurePrefab, rodTip.position, Quaternion.identity);
         lureRb = currentLure.GetComponent<Rigidbody>();
         if (lureRb == null)
@@ -76,11 +88,10 @@ public class FishingRod : MonoBehaviour
             lureRb = currentLure.AddComponent<Rigidbody>();
         }
 
-        // Add forward force
         lureRb.AddForce(rodTip.forward * castForce, ForceMode.VelocityChange);
     }
 
-    void ReelIn()
+    private void ReelIn()
     {
         if (currentLure != null)
         {
