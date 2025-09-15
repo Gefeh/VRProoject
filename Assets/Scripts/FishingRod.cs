@@ -27,6 +27,7 @@ public class FishingRod : MonoBehaviour
     // Internal
     private GameObject currentLure;
     private Rigidbody lureRb;
+    private bool isHeld = false; // NEW: Tracks if the rod is held
 
     void OnEnable()
     {
@@ -69,12 +70,14 @@ public class FishingRod : MonoBehaviour
 
     private void OnTriggerPressed(InputAction.CallbackContext context)
     {
+        if (!isHeld) return; // Only works when held
         if (currentLure == null)
             CastLure();
     }
 
     private void OnAButtonPressed(InputAction.CallbackContext context)
     {
+        if (!isHeld) return; // Only works when held
         if (currentLure != null)
             ReelIn();
     }
@@ -101,4 +104,12 @@ public class FishingRod : MonoBehaviour
             lineRenderer.enabled = false;
         }
     }
+
+    // --- NEW METHODS ---
+    // Call these from your grab system (e.g., XR Grab Interactable events)
+    public void SetHeld(bool held)
+    {
+        isHeld = held;
+    }
 }
+
