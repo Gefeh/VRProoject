@@ -20,7 +20,6 @@ public class TapBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(handle.transform.rotation.eulerAngles.x);
         if (handle.transform.rotation.eulerAngles.x >= 85)
         {
             handleTurned = true;
@@ -53,5 +52,15 @@ public class TapBehaviour : MonoBehaviour
             glass.Fill();
             keg.Empty();
         }
+    }
+
+    public void SelectGlass(GlassBehaviour selectedGlass)
+    {
+        glass = selectedGlass;
+    }
+
+    public void RemoveGlass()
+    {
+        glass = null;
     }
 }

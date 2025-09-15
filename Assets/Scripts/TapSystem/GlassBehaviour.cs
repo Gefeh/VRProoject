@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
 public class GlassBehaviour : MonoBehaviour
@@ -6,10 +7,12 @@ public class GlassBehaviour : MonoBehaviour
     public int maxVolume;
     public bool isOverflowing = false;
 
+    public Material material;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,10 +27,34 @@ public class GlassBehaviour : MonoBehaviour
         {
             //some sort of consequence for tapping badly
         }
+
+        ChangeColor();
     }
 
     public void Fill()
     {
         currentVolume++;
+    }
+
+    public void ChangeColor()
+    {
+        if (isOverflowing)
+        {
+            material.color = Color.red;
+        } else
+        {
+            if (currentVolume == 0)
+            {
+                material.color = Color.white;
+            }
+            if (currentVolume > 0 && currentVolume < 300)
+            {
+                material.color = Color.yellow;
+            }
+            if (currentVolume > 300)
+            {
+                material.color = Color.green;
+            }
+        }
     }
 }
