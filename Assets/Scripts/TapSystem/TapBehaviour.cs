@@ -5,6 +5,7 @@ public class TapBehaviour : MonoBehaviour
 {
     [SerializeField] GlassBehaviour glass;
     [SerializeField] KegBehaviour keg;
+    [SerializeField] GameObject handle;
 
     public bool glassAvailable;
     public bool kegAvailable;
@@ -19,6 +20,16 @@ public class TapBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(handle.transform.rotation.eulerAngles.x);
+        if (handle.transform.rotation.eulerAngles.x >= 85)
+        {
+            handleTurned = true;
+        }
+        else
+        {
+            handleTurned = false;
+        }
+
         if (keg.isEmpty || keg == null)
         {
             kegAvailable = false;
