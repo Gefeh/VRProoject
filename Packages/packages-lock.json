@@ -16,6 +16,9 @@
       "source": "registry",
       "dependencies": {
         "com.unity.collections": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.9",
       "depth": 0,
