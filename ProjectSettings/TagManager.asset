@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - Bar
   layers:
   - Default
   - TransparentFX

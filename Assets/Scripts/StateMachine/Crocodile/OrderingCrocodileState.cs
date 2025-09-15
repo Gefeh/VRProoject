@@ -11,7 +11,7 @@ public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void EnterState()
     {
-        
+        _machine.crocodile.PlayAnimation("Crocodile_Sit");
     }
 
     public override void ExitState()
@@ -21,12 +21,17 @@ public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override CrocodileStateMachine.States GetNextState()
     {
-        return CrocodileStateMachine.States.Wandering;
+        if (_machine.crocodile.Satisfaction >= _machine.crocodile.MaxSatisfaction)
+        {
+            return CrocodileStateMachine.States.Leaving;
+        }
+        return CrocodileStateMachine.States.Ordering;
     }
 
     public override void UpdateState()
     {
-        
+        _machine.crocodile.LookAtPlayer();
+        _machine.crocodile.ReduceSatisfaction();
     }
 
 }
