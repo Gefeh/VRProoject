@@ -22,6 +22,7 @@ public class ApproachingCrocodileState : BaseState<CrocodileStateMachine.States>
         {
             _machine.crocodile.NavMeshAgent.ResetPath();
         }
+        _hasReachedTarget = false;
     }
 
     public override CrocodileStateMachine.States GetNextState()

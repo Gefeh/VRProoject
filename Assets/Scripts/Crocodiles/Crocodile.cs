@@ -94,7 +94,12 @@ public class Crocodile : MonoBehaviour
     public void Satisfy(float percentage = 100)
     {
         _satisfaction = (MaxSatisfaction * (percentage/100));
-        _thirstCoefficient *= Random.Range(1f, 1.1f);
+        _thirstCoefficient *= Random.Range(1f, 1.15f);
+
+        if (Random.value < 0.1f)
+        {
+            _crocodileManager.SpawnCrocodiles(1);
+        }
     }
 
     /// <summary>

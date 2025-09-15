@@ -11,7 +11,7 @@ public class IdleCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void EnterState()
     {
-        _machine.crocodile.PlayAnimation("Crocodile_Swim");
+        _machine.crocodile.PlayAnimation("Crocodile_Walk");
     }
 
     public override void ExitState()

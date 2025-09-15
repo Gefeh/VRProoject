@@ -47,7 +47,7 @@ public class CrocodileManager : MonoBehaviour
         SpawnCrocodiles(numberOfCrocodilesAtStart);
     }
 
-    private void SpawnCrocodiles(int amount)
+    public void SpawnCrocodiles(int amount)
     {
         int crocodilesToSpawn = Mathf.Min(amount, spawnPoints.Count);
         if (amount > spawnPoints.Count)

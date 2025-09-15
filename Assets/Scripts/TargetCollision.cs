@@ -5,11 +5,11 @@ public class TargetCollision : MonoBehaviour
 {
     [SerializeField] private string[] targetTags;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(UnityEngine.Collider other)
     {
-        if (targetTags.Contains(collision.gameObject.tag))
+        if (targetTags.Contains(other.gameObject.tag))
         {
-            Destroy(collision.gameObject);
+            Destroy(other.transform.root.gameObject);
         }
     }
 }
