@@ -34,6 +34,8 @@ public class CrocodileStateMachine : StateMachine<CrocodileStateMachine.States>
         _States.Add(States.Ordering, new OrderingCrocodileState(States.Ordering, this));
         _States.Add(States.Approaching, new ApproachingCrocodileState(States.Approaching, this));
         _States.Add(States.Leaving, new LeavingCrocodileState(States.Leaving, this));
+        _States.Add(States.Hostile, new HostileCrocodileState(States.Hostile, this));
+        _States.Add(States.Attacking, new AttackingCrocodileState(States.Attacking, this));
 
         _CurrentState = _States[States.Idle];
     }

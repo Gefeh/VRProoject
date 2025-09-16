@@ -22,6 +22,9 @@ public class Crocodile : MonoBehaviour
     [SerializeField] private float _thirstThreshold = 50f;
     [SerializeField] private float _thirstCoefficient = 1f;
 
+    [Header("Combat")]
+    [SerializeField] public bool nearPlayer;
+
     public Animator Animator { get { return _animator; } private set { _animator = value; } }
     public NavMeshAgent NavMeshAgent { get { return _navMeshAgent; } private set { _navMeshAgent = value; } }
     public CrocodileManager CrocodileManager { get { return _crocodileManager; } set { _crocodileManager = value; } }
@@ -146,5 +149,19 @@ public class Crocodile : MonoBehaviour
                                              playerTransform.position.z);
 
         transform.LookAt(targetPosition);
+    }
+
+    public void DealDamage()
+    {
+        if (nearPlayer)
+        {
+            _crocodileManager.player.TakeDamage();
+        }
+    }
+
+    public void ApproachPlayer()
+    {
+        Transform playerTransform = Camera.main.transform;
+        NavMeshAgent.SetDestination(playerTransform.position);
     }
 }

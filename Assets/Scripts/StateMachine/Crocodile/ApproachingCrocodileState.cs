@@ -38,7 +38,7 @@ public class ApproachingCrocodileState : BaseState<CrocodileStateMachine.States>
 
     public override void UpdateState()
     {
-        _machine.crocodile.ReduceSatisfaction();
+        
     }
 
     public override void OnTriggerReceived(Collider other)

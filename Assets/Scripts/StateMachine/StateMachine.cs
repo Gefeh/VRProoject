@@ -6,7 +6,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
 {
     [Tooltip("The current state of the machine.")]
     [SerializeField]
-    private string _currentStateName;
+    public string currentStateName;
 
     [Tooltip("Use this to manually transition to a new state from the Inspector.")]
     public EState transitionToState;
@@ -82,7 +82,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
     {
         if (_CurrentState != null)
         {
-            _currentStateName = _CurrentState.StateKey.ToString();
+            currentStateName = _CurrentState.StateKey.ToString();
         }
     }
 }

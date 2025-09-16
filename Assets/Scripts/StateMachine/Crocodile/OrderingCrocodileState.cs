@@ -25,7 +25,11 @@ public class OrderingCrocodileState : BaseState<CrocodileStateMachine.States>
         {
             return CrocodileStateMachine.States.Leaving;
         }
-        return CrocodileStateMachine.States.Ordering;
+        else if (_machine.crocodile.Satisfaction < 0)
+        {
+            return CrocodileStateMachine.States.Hostile;
+        }
+            return CrocodileStateMachine.States.Ordering;
     }
 
     public override void UpdateState()

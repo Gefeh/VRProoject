@@ -19,6 +19,7 @@ public class CrocodileManager : MonoBehaviour
 
     [Header("Bar")]
     [SerializeField] private GameObject _bar;
+    public Player player;
 
     public GameObject Bar { get { return _bar; } private set { _bar = value;  } }
     public GameObject CrocodilePrefab { get { return _crocodilePrefab; } private set { _crocodilePrefab = value;  } }
