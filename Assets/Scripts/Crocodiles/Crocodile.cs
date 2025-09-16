@@ -93,7 +93,8 @@ public class Crocodile : MonoBehaviour
 
     public void Satisfy(float percentage = 100)
     {
-        _satisfaction = (MaxSatisfaction * (percentage/100));
+        _satisfaction = _maxSatisfaction * 1.01f;
+
         _thirstCoefficient *= Random.Range(1f, 1.15f);
 
         if (Random.value < 0.1f)
@@ -138,6 +139,12 @@ public class Crocodile : MonoBehaviour
 
     public void LookAtPlayer()
     {
-        transform.LookAt(Camera.main.transform);
+        Transform playerTransform = Camera.main.transform;
+
+        Vector3 targetPosition = new Vector3(playerTransform.position.x,
+                                             this.transform.position.y,
+                                             playerTransform.position.z);
+
+        transform.LookAt(targetPosition);
     }
 }

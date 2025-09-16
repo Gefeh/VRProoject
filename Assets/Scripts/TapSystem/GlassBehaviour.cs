@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(Renderer))]
 public class GlassBehaviour : MonoBehaviour
@@ -9,6 +10,9 @@ public class GlassBehaviour : MonoBehaviour
     public int maxVolume = 600;
 
     public bool isOverflowing => currentVolume > maxVolume;
+    public bool ready = false;
+
+    private XRGrabInteractable _grabInteractable;
 
     private Renderer _renderer;
     private MaterialPropertyBlock _propBlock;
@@ -16,8 +20,24 @@ public class GlassBehaviour : MonoBehaviour
 
     void Awake()
     {
+        _grabInteractable = GetComponent<XRGrabInteractable>();
         _renderer = GetComponent<Renderer>();
         _propBlock = new MaterialPropertyBlock();
+    }
+
+    public void RegisterWithTap(TapBehaviour tap)
+    {
+        if (tap == null) return;
+
+        _grabInteractable.selectExited.AddListener((args) => tap.RemoveGlass());
+
+        Debug.Log("Glass events registered with tap: " + tap.name);
+    }
+
+    public void UnregisterAllTapEvents()
+    {
+        _grabInteractable.selectExited.RemoveAllListeners();
+        Debug.Log("Glass events unregistered.");
     }
 
     void Start()
@@ -27,11 +47,7 @@ public class GlassBehaviour : MonoBehaviour
 
     void Update()
     {
-         
-         if (Input.GetKey(KeyCode.Space))
-         {
-             Fill();
-         }
+
     }
 
     public void Fill()
@@ -68,10 +84,20 @@ public class GlassBehaviour : MonoBehaviour
         else
         {
             targetColor = Color.green;
+            ready = true;
         }
 
         _propBlock.SetColor(ColorID, targetColor);
         
         _renderer.SetPropertyBlock(_propBlock);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") && ready)
+        {
+            other.GetComponentInParent<Crocodile>().Satisfy((currentVolume/maxVolume)*100);
+            Destroy(this.gameObject);
+        }
     }
 }

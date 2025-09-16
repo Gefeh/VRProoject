@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 5109074959198569533}
   - component: {fileID: 741387597584923244}
   - component: {fileID: 8417338093675849965}
-  - component: {fileID: 8567306432569841125}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -159,28 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glassPrefab: {fileID: 4027942789442751092, guid: 3d98704212696934d94c347ff3069604, type: 3}
-  canSpawn: 1
---- !u!65 &8567306432569841125
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 257957791963820971}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  spawnPoint: {fileID: 0}
+  spawnCooldown: 1
 --- !u!1 &287330423307916086
 GameObject:
   m_ObjectHideFlags: 0
