@@ -1,32 +1,41 @@
-using UnityEditor;
 using UnityEngine;
+using System.Collections;
 
 public class GlassGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject glassPrefab;
+    [Header("Spawning")]
+    [SerializeField] private GameObject glassPrefab;
 
-    public bool canSpawn = true;
+    [Tooltip("The exact spot where the new glass will be instantiated. If left empty, it will spawn at this object's position.")]
+    [SerializeField] private Transform spawnPoint;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Cooldown")]
+    [Tooltip("The time in seconds to wait before another glass can be spawned.")]
+    [SerializeField] private float spawnCooldown = 1.0f;
+
+    private bool canSpawn = true;
+
+    /// <summary>
+    /// This is the public method that will be called by the XR Interaction event.
+    /// </summary>
+    public void SpawnGlass()
     {
-        
+        if (!canSpawn || glassPrefab == null)
+        {
+            return;
+        }
+
+        Transform spawnLocation = spawnPoint != null ? spawnPoint : this.transform;
+
+        Instantiate(glassPrefab, spawnLocation.position, spawnLocation.rotation);
+
+        StartCoroutine(CooldownRoutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator CooldownRoutine()
     {
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Instantiate(glassPrefab);
         canSpawn = false;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
+        yield return new WaitForSeconds(spawnCooldown);
         canSpawn = true;
     }
 }

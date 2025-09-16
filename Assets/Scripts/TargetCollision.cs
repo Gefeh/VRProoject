@@ -9,7 +9,7 @@ public class TargetCollision : MonoBehaviour
     {
         if (targetTags.Contains(other.gameObject.tag))
         {
-            Destroy(other.transform.root.gameObject);
+            Destroy(other.gameObject.GetComponentInParent<Crocodile>().gameObject);
         }
     }
 }
